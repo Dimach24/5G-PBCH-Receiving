@@ -1,4 +1,4 @@
-function bits = descramblePayload(bits,NCellId,Lmax_)
+function out_seq = descramblePayload(bits,NCellId,Lmax_)
     %descrambling Procedure of revererse scrambling
     % after CRC detachment [7.1.2, TS 38.212] 
     arguments

@@ -1,4 +1,4 @@
-function bits = polarDecoding(bits)
+function out_seq = polarDecoding(bits)
     % polarDecoding Procedure of polar decoding and deinterleving [7.1.4, TS 38.212]
     % [TS 38.212 clause 7.1.4] -> [TS 38.212 clause 5.3.1.2]
     arguments
@@ -45,10 +45,10 @@ function bits = polarDecoding(bits)
             end
         end
     end 
-    bits=deinterleave(bits);
+    out_seq=deinterleave(out_seq);
 end
 
-function bits = deinterleave(bits)
+function out_seq = deinterleave(bits)
     % deinterleave process of reverse interleaving 
     % after polar decoding [7.1.4, TS 38.212]
     
@@ -80,6 +80,5 @@ function bits = deinterleave(bits)
     for i = 1:K 
     out_seq(INTERLEAVING_PATTERN(i)+1) = bits(i);
     end
-    bits=out_seq;
 end
 

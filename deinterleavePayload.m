@@ -1,4 +1,4 @@
-function bits = deinterleavePayload(bits)
+function out_seq = deinterleavePayload(bits)
     % deinterleavePayload process of reverse interleaving before
     % MIB extracting [7.1.1, TS 38.212]
     
@@ -25,6 +25,6 @@ function bits = deinterleavePayload(bits)
     copy_seq(25:28) = out_seq(7:10); % LSB of SFN 4 bits
     copy_seq(29) = out_seq(11); % HRF bit
     copy_seq(30:32) = out_seq(12:14); % kssb 3 bits
-    bits = copy_seq;
+    out_seq = copy_seq;
 end
 
