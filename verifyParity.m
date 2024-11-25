@@ -24,7 +24,7 @@ function [bits,verification_success] = verifyParity(bits,crc_type)
     end
      
     % checking crc (must be zeros)
-    [~,crc]=AttachParityBits(bits,crc_type,false);
+    [~,crc]=attachParityBits(bits,crc_type,false);
     verification_success=~any(crc);
     % extracting data
     bits=bits(1:end-N);
