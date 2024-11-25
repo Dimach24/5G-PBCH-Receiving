@@ -8,6 +8,6 @@ function ibarSsb = extractIbarSsb_lsb(dmrs, NCellId)
     end
     % maximum likehood 
     [~,blockIndexLsb]=max(corr_data);
-    IbarSsb=blockIndexLsb-1;
+    ibarSsb=blockIndexLsb-1;
 end
 
