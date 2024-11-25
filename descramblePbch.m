@@ -1,6 +1,9 @@
 function [out_seq] = descramblePbch(bits,NCellId, Lmax_, ibarSsb_lsb)
+    % THIS PROCEDURE IS EQUAL TO SCRAMBLING PROCEDURE 
+    % [deprecated]
     % DescrambleProcedure of revererse scrambling
     % after demodulation [7.3.3.1, TS 38.211]
+    
     arguments
         bits (1,:) % input sequence (boolean matrix)
         NCellId (1,1)
@@ -8,12 +11,12 @@ function [out_seq] = descramblePbch(bits,NCellId, Lmax_, ibarSsb_lsb)
         ibarSsb_lsb (1,1) % candidate SS/PBCH block index
     end
     
-    %init
+    % init
     A = length(bits);
     s = zeros(1,A);
     M = A;
     
-    %determinaton of nu
+    % determinaton of nu
     ibarSsb_lsb = fliplr(dec2bin(ibarSsb_lsb,3));
     if Lmax_ == 4
         nu = [ibarSsb_lsb(2) ibarSsb_lsb(1)];
@@ -22,7 +25,7 @@ function [out_seq] = descramblePbch(bits,NCellId, Lmax_, ibarSsb_lsb)
     end
     nu = bin2dec(num2str(nu));
     
-    %determination of c
+    % determination of c
     x1 = zeros(1,2000);
     x2 = zeros(1,2000);
     x1(1) = 1;
@@ -35,7 +38,7 @@ function [out_seq] = descramblePbch(bits,NCellId, Lmax_, ibarSsb_lsb)
         c(n1) = mod(x1(n1+1600)+x2(n1+1600),2);
     end
     
-    %determination of s
+    % determination of s
     i = 0;
     j = 0;
     while i < A
@@ -44,7 +47,7 @@ function [out_seq] = descramblePbch(bits,NCellId, Lmax_, ibarSsb_lsb)
         i = i+1;
     end
     
-    %descrambling procedure
+    % descrambling procedure
     out_seq = zeros (1,A);
     for i = 1:A
         out_seq(i) = mod(bits(i)+ s(i),2);

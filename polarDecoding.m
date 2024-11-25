@@ -5,21 +5,22 @@ function out_seq = polarDecoding(bits)
         bits (1,512) % PolarCode - input coded sequence of bits
     end
 
-    N = 512; % input sequence length
-    K = 56; % output sequence length
+    N = 512;        % input sequence length
+    K = 56;         % output sequence length
     
-    % Q_I_N definition
-    Q_0_Nmax = matfile("ReliabilityAndPolarCodingSeqIndexes.mat").ReliabilityAndPolarSeqIndexes.'; % table 5.3.1.2-1
-        j = 1;
-        for i = 1:1024
-            if Q_0_Nmax(i)<N
-                Q_0_N(j) = Q_0_Nmax(i);
-                j=j+1;
-                if j > N
-                    break
-                end
+    % just algo from 5.3.1.2 of TS 38.212
+    % Q_I_N definition table 5.3.1.2-1
+    Q_0_Nmax = matfile("ReliabilityAndPolarCodingSeqIndexes.mat").ReliabilityAndPolarSeqIndexes.'; 
+    j = 1;
+    for i = 1:1024
+        if Q_0_Nmax(i)<N
+            Q_0_N(j) = Q_0_Nmax(i);
+            j=j+1;
+            if j > N
+                break
             end
         end
+    end
     Q_I_N = Q_0_N((end-K+1):end);
     
     % G_N matrix definition
